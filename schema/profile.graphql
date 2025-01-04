@@ -1,0 +1,10 @@
+type Profile {
+  id: ID!
+  firstName: String
+  lastName: String
+  profileImg: String
+  email: String
+  phoneNumber: String
+  county: String
+  country: String
+}
