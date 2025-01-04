@@ -26,4 +26,5 @@ type Nutrition {
 
 type Query {
     recipes: [Recipe!]!
+    profile: Profile!
 }

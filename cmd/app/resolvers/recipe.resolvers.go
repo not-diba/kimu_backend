@@ -58,42 +58,6 @@ func (r *queryResolver) Recipes(ctx context.Context) ([]*models.Recipe, error) {
 	return recipes, nil
 }
 
-func (r *queryResolver) getIngredientsForRecipe(recipeID string) ([]models.Ingredient, error) {
-	rows, err := r.DB.Query(`SELECT name, quantity FROM "Ingredient" WHERE "recipeId" = $1`, recipeID)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var ingredients []models.Ingredient
-	for rows.Next() {
-		var ingredient models.Ingredient
-		if err := rows.Scan(&ingredient.Name, &ingredient.Quantity); err != nil {
-			return nil, err
-		}
-		ingredients = append(ingredients, ingredient)
-	}
-	return ingredients, nil
-}
-
-func (r *queryResolver) getNutritionForRecipe(recipeID string) ([]models.Nutrition, error) {
-	rows, err := r.DB.Query(`SELECT "nutritionItem", quantity FROM "Nutrition" WHERE "recipeId" = $1`, recipeID)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var nutrition []models.Nutrition
-	for rows.Next() {
-		var nutri models.Nutrition
-		if err := rows.Scan(&nutri.NutritionItem, &nutri.Quantity); err != nil {
-			return nil, err
-		}
-		nutrition = append(nutrition, nutri)
-	}
-	return nutrition, nil
-}
-
 // Query returns graph.QueryResolver implementation.
 func (r *Resolver) Query() graph.QueryResolver { return &queryResolver{r} }
 
