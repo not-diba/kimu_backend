@@ -7,4 +7,5 @@ type Profile {
   phoneNumber: String
   county: String
   country: String
+  createdAt: String
 }
