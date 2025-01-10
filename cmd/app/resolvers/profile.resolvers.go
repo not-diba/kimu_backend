@@ -8,7 +8,7 @@ import (
 
 // Profile is the resolver for the profile field.
 func (r *queryResolver) Profile(ctx context.Context) (*models.Profile, error) {
-	row := r.DB.QueryRow(`SELECT id, "firstName", "lastName", "profileImg", "email", "phoneNumber", "county", "country" FROM "Profile" LIMIT 1`)
+	row := r.DB.QueryRow(`SELECT id, "firstName", "lastName", "profileImg", "email", "phoneNumber", "county", "country", "createdAt" FROM "Profile" LIMIT 1`)
 
 	profile := &models.Profile{}
 
@@ -21,6 +21,7 @@ func (r *queryResolver) Profile(ctx context.Context) (*models.Profile, error) {
 		&profile.PhoneNumber,
 		&profile.County,
 		&profile.Country,
+		&profile.CreatedAt,
 	)
 	if err == sql.ErrNoRows {
 		return nil, nil

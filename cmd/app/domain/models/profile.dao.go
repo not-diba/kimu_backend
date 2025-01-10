@@ -9,4 +9,5 @@ type Profile struct {
 	PhoneNumber *string `json:"phoneNumber"` // Nullable in GraphQL
 	County      *string `json:"county"`      // Nullable in GraphQL
 	Country     *string `json:"country"`     // Nullable in GraphQL
+	CreatedAt   *string `json:"createdAt"`   // Nullable in GraphQL
 }
